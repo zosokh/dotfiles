@@ -83,6 +83,7 @@ set wildmenu wildmode=list:full
 set wrap
 
 scriptencoding utf-8
+set timeout timeoutlen=50
 
 "プラグイン
 "//////////////////////////////////////////////////////
