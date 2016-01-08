@@ -85,6 +85,26 @@ set wrap
 scriptencoding utf-8
 set timeout timeoutlen=50
 
+
+
+function! ZenkakuSpace()
+  highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
+endfunction
+
+if has('syntax')
+    augroup ZenkakuSpace
+        autocmd!
+            " ZenkakuSpaceをカラーファイルで設定するなら次の行は削除
+        autocmd ColorScheme       * call ZenkakuSpace()
+        " 全角スペースのハイライト指定
+        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+    augroup END
+    call ZenkakuSpace()
+endif
+
+
+
+
 "プラグイン
 "//////////////////////////////////////////////////////
 if has('vim_starting')
@@ -97,19 +117,26 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
 " インストールするプラグインをここに記述
 " ファイルオープンを便利に
-NeoBundle 'Shougo/unite.vim'
+"NeoBundle 'Shougo/unite.vim'
 " Unite.vimで最近使ったファイルを表示できるようにする
 NeoBundle 'Shougo/neomru.vim'
 " ファイルをtree表示してくれる
 NeoBundle 'scrooloose/nerdtree'
 " モード状態をカラフル表示
 NeoBundle 'itchyny/lightline.vim'
-
+NeoBundle 'cocopon/lightline-hybrid.vim'
+" インデントに色を付けて見やすくする
+NeoBundle 'nathanaelkane/vim-indent-guides'
+" カラー
+NeoBundle 'w0ng/vim-hybrid'
+" コメントアウト
+NeoBundle 'tomtom/tcomment_vim'
 
 call neobundle#end()
 
 " ファイルタイプ別のプラグイン/インデントを有効にする
 filetype plugin indent on
+NeoBundleCheck
 
 
 
@@ -138,3 +165,43 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vspli
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 """"""""""""""""""""""""""""""
+
+" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup = 1
+
+
+" lightline Settings
+"let g:lightline = {
+"        \'colorscheme': 'hybrid',
+"        \ 'mode_map': {'c': 'NORMAL'},
+"        \ 'active': {
+"        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
+"        \   'right': [ [ 'syntastic', 'lineinfo' ],
+"        \              [ 'percent' ],
+"        \              [ 'filetype', 'fileencoding', 'pyenv' ] ]
+"        \ },
+"        \ 'component_expand':{
+"        \   'syntastic': 'SyntasticStatuslineFlag'
+"        \ },
+"        \ 'component_type':{
+"        \   'syntastic': 'error'
+"        \ },
+"        \ 'component_function': {
+"        \   'modified': 'MyModified',
+"        \   'readonly': 'MyReadonly',
+"        \   'fugitive': 'MyFugitive',
+"        \   'filename': 'MyFilename',
+"        \   'fileformat': 'MyFileformat',
+"        \   'filetype': 'MyFiletype',
+"        \   'fileencoding': 'MyFileencoding',
+"        \   'mode': 'MyMode',
+"        \   'pyenv': 'pyenv#statusline#component'
+"        \ }
+"        \}
+
+
+" Highlight Settings
+syntax enable
+set background=dark
+colorscheme hybrid
+set t_Co=256
