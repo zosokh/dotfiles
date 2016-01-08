@@ -81,6 +81,8 @@ set visualbell
 set wildmenu wildmode=list:full
 "ウィンドウの幅より長い行は折り返され、次の行に続けて表示される。
 set wrap
+"検索結果をハイライトする
+set hlsearch
 
 scriptencoding utf-8
 set timeout timeoutlen=50
