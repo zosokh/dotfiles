@@ -1,40 +1,5 @@
-"プラグイン
-"//////////////////////////////////////////////////////
-if has('vim_starting')
-    " 初回起動時のみruntimepathにneobundleのパスを指定する
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" NeoBundleを初期化
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" インストールするプラグインをここに記述
-" ファイルをtree表示してくれる
-NeoBundle 'scrooloose/nerdtree'
-" モード状態をカラフル表示
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'cocopon/lightline-hybrid.vim'
-" インデントに色を付けて見やすくする
-NeoBundle 'nathanaelkane/vim-indent-guides'
-" カラー
-NeoBundle 'w0ng/vim-hybrid'
-" コメントアウト
-NeoBundle "tyru/caw.vim.git"
-" オートクローズ
-NeoBundle 'Townk/vim-autoclose'
-" 構文エラーチェック
-NeoBundle 'scrooloose/syntastic'
-" 補完
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
-
-
-
-call neobundle#end()
-
-" ファイルタイプ別のプラグイン/インデントを有効にする
-filetype plugin indent on
-NeoBundleCheck
-
+" neo bundle読込
+source ~/dotfiles/vimrc.bundle
 
 
 "シンタックスをONにする(重い？)
@@ -43,7 +8,8 @@ NeoBundleCheck
 set nocompatible
 "GUI版のvimを使う時にアンチエイリアスされたフォントが使われる
 "set antialias
-"set autoindent
+" オートインデント
+set autoindent
 "backspaceを使えるようにする
 set backspace=indent,eol,start
 "バックアップファイルを作る際の拡張子
@@ -189,3 +155,7 @@ let g:AutoClosePairs_add = "<> \"\" '"
 " コメントアウト キーバインド
 nmap <C-K> <Plug>(caw:i:toggle)
 vmap <C-K> <Plug>(caw:i:toggle)
+
+" ctags
+nnoremap <C-h> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+nnoremap <C-t> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
