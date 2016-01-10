@@ -1,5 +1,44 @@
-"シンタックスをONにする
-:syntax on
+"プラグイン
+"//////////////////////////////////////////////////////
+if has('vim_starting')
+    " 初回起動時のみruntimepathにneobundleのパスを指定する
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" NeoBundleを初期化
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" インストールするプラグインをここに記述
+" ファイルをtree表示してくれる
+NeoBundle 'scrooloose/nerdtree'
+" モード状態をカラフル表示
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'cocopon/lightline-hybrid.vim'
+" インデントに色を付けて見やすくする
+NeoBundle 'nathanaelkane/vim-indent-guides'
+" カラー
+NeoBundle 'w0ng/vim-hybrid'
+" コメントアウト
+NeoBundle "tyru/caw.vim.git"
+" オートクローズ
+NeoBundle 'Townk/vim-autoclose'
+" 構文エラーチェック
+NeoBundle 'scrooloose/syntastic'
+" 補完
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+
+
+
+call neobundle#end()
+
+" ファイルタイプ別のプラグイン/インデントを有効にする
+filetype plugin indent on
+NeoBundleCheck
+
+
+
+"シンタックスをONにする(重い？)
+" :syntax on
 "vim互換にしない
 set nocompatible
 "GUI版のvimを使う時にアンチエイリアスされたフォントが使われる
@@ -15,10 +54,10 @@ set clipboard=unnamed
 set cmdheight=2
 "確認ダイヤログ（保存されていない時のvim終了など）
 set confirm
-"列を強調表示
-set cursorcolumn
-"行を強調表示
-set cursorline
+"列を強調表示(重い？)
+" set cursorcolumn
+"行を強調表示(重い？)
+" set cursorline
 "UTF8
 set encoding=utf-8
 "入力モードでTabキー押下時、タブ文字ではなく半角スペースが挿入
@@ -106,108 +145,9 @@ endif
 
 
 
-
-"プラグイン
-"//////////////////////////////////////////////////////
-if has('vim_starting')
-    " 初回起動時のみruntimepathにneobundleのパスを指定する
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" NeoBundleを初期化
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" インストールするプラグインをここに記述
-" ファイルオープンを便利に
-"NeoBundle 'Shougo/unite.vim'
-" Unite.vimで最近使ったファイルを表示できるようにする
-NeoBundle 'Shougo/neomru.vim'
-" ファイルをtree表示してくれる
-NeoBundle 'scrooloose/nerdtree'
-" モード状態をカラフル表示
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'cocopon/lightline-hybrid.vim'
-" インデントに色を付けて見やすくする
-NeoBundle 'nathanaelkane/vim-indent-guides'
-" カラー
-NeoBundle 'w0ng/vim-hybrid'
-" コメントアウト
-NeoBundle 'tomtom/tcomment_vim'
-" オートクローズ
-NeoBundle 'Townk/vim-autoclose'
-" 構文エラーチェック
-NeoBundle 'scrooloose/syntastic'
-" 補完
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
-
-
-
-call neobundle#end()
-
-" ファイルタイプ別のプラグイン/インデントを有効にする
-filetype plugin indent on
-NeoBundleCheck
-
-
-
-
-" http://blog.remora.cx/2010/12/vim-ref-with-unite.html
-""""""""""""""""""""""""""""""
-" Unit.vimの設定
-""""""""""""""""""""""""""""""
-" 入力モードで開始する
-let g:unite_enable_start_insert=1
-" バッファ一覧
-noremap <C-P> :Unite buffer<CR>
-" ファイル一覧
-noremap <C-N> :Unite -buffer-name=file file<CR>
-" 最近使ったファイルの一覧
-noremap <C-Z> :Unite file_mru<CR>
-" sourcesを「今開いているファイルのディレクトリ」とする
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-" ウィンドウを分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-" ウィンドウを縦に分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" ESCキーを2回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-""""""""""""""""""""""""""""""
-
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
 
-
-" lightline Settings
-"let g:lightline = {
-"        \'colorscheme': 'hybrid',
-"        \ 'mode_map': {'c': 'NORMAL'},
-"        \ 'active': {
-"        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
-"        \   'right': [ [ 'syntastic', 'lineinfo' ],
-"        \              [ 'percent' ],
-"        \              [ 'filetype', 'fileencoding', 'pyenv' ] ]
-"        \ },
-"        \ 'component_expand':{
-"        \   'syntastic': 'SyntasticStatuslineFlag'
-"        \ },
-"        \ 'component_type':{
-"        \   'syntastic': 'error'
-"        \ },
-"        \ 'component_function': {
-"        \   'modified': 'MyModified',
-"        \   'readonly': 'MyReadonly',
-"        \   'fugitive': 'MyFugitive',
-"        \   'filename': 'MyFilename',
-"        \   'fileformat': 'MyFileformat',
-"        \   'filetype': 'MyFiletype',
-"        \   'fileencoding': 'MyFileencoding',
-"        \   'mode': 'MyMode',
-"        \   'pyenv': 'pyenv#statusline#component'
-"        \ }
-"        \}
 
 
 " Highlight Settings
@@ -245,3 +185,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 " autoclose Settings
 let g:AutoClosePairs_add = "<> \"\" '"
+
+" コメントアウト キーバインド
+nmap <C-K> <Plug>(caw:i:toggle)
+vmap <C-K> <Plug>(caw:i:toggle)
