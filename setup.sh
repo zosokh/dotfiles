@@ -4,12 +4,12 @@
 symbolic_link()
 {
 #    DOT_FILES=( zshrc vimrc vim tmux.conf gvimrc bashrc bash_profile ctags zlogout gitignore_global)
-    DOT_FILES=( vimrc)
+    DOT_FILES=( vimrc vim)
 
     for file in ${DOT_FILES[@]}
     do
         rm -f $HOME/.$file
-        ln -s $HOME/dotfiles/.$file $HOME/.$file
+        ln -fs $HOME/dotfiles/.$file $HOME/.$file
     done
 }
 
@@ -32,8 +32,8 @@ load_submodule()
 {
     cd $HOME/dotfiles
     #NeoBundleのサブモジュール
-    git submodule init -- vim/bundle/neobundle.vim
-    git submodule update -- vim/bundle/neobundle.vim
+    git submodule init -- .vim/bundle/neobundle.vim
+    git submodule update -- .vim/bundle/neobundle.vim
 }
 
 # NeoBundleInstall
@@ -62,7 +62,7 @@ main()
 {
     symbolic_link
 #    init_git
-#    load_submodule
+    load_submodule
     neobundle
 #    install_ctags
 }
