@@ -4,7 +4,7 @@
 symbolic_link()
 {
 #    DOT_FILES=( zshrc vimrc vim tmux.conf gvimrc bashrc bash_profile ctags zlogout gitignore_global)
-    DOT_FILES=( vimrc vim)
+    DOT_FILES=( zshrc vimrc vim)
 
     for file in ${DOT_FILES[@]}
     do
@@ -61,7 +61,7 @@ install_ctags()
 main()
 {
     symbolic_link
-#    init_git
+    init_git
     load_submodule
     neobundle
 #    install_ctags
