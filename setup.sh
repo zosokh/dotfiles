@@ -8,7 +8,7 @@ symbolic_link()
 
     for file in ${DOT_FILES[@]}
     do
-        rm -f $HOME/.$file
+        rm -rf $HOME/.$file
         ln -fs $HOME/dotfiles/.$file $HOME/.$file
     done
 }
