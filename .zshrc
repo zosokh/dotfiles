@@ -165,3 +165,8 @@ case ${OSTYPE} in
 esac
 
 # vim:set ft=zsh:
+
+
+#個人設定
+export GIT_SSL_NO_VERIFY=1
+export GIT_PAGER="lv -c"
