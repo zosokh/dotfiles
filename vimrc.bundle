@@ -26,6 +26,10 @@ NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'scrooloose/syntastic'
 " 補完
 NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+" markdown
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 
 
 

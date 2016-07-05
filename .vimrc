@@ -88,6 +88,8 @@ set wildmenu wildmode=list:full
 set wrap
 "検索結果をハイライトする
 set hlsearch
+" markdown
+au BufRead,BufNewFile *.md set filetype=markdown
 
 scriptencoding utf-8
 set timeout timeoutlen=50
