@@ -155,8 +155,8 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 let g:AutoClosePairs_add = "<> \"\" '"
 
 " コメントアウト キーバインド
-nmap <C-K> <Plug>(caw:i:toggle)
-vmap <C-K> <Plug>(caw:i:toggle)
+nmap <C-K> <Plug>(caw:hatpos:toggle)
+vmap <C-K> <Plug>(caw:hatpos:toggle)
 
 " ctags
 nnoremap <C-h> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
